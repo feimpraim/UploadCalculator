@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Video Upload Time Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        
+        .calculator-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+            <div class="col-md-8 calculator-container">
+                <h1 class="text-center">Video Upload Time Calculator</h1>
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="file_size">File Size:</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" name="file_size" required>
+                            <div class="input-group-append">
+                                <select class="form-control" name="file_size_unit">
+                                    <option value="MB">MB</option>
+                                    <option value="GB">GB</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="internet_speed">Internet Speed (Mbps):</label>
+                        <input type="number" class="form-control" name="internet_speed" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block">Calculate</button>
+                </form>
+
+                {% if upload_time %}
+                <div class="result">
+                    <p class="text-center">Estimated upload time: {% if upload_time[0] > 0 %}{{ upload_time[0] }} hour{% if upload_time[0] > 1 %}s{% endif %}{% endif %} {% if upload_time[1] > 0 %}{{ upload_time[1] }} minute{% if upload_time[1] > 1 %}s{% endif %}{% endif %}
+                        {% if upload_time[2] > 0 %}{{ upload_time[2] }} second{% if upload_time[2] > 1 %}s{% endif %}{% endif %}
+                    </p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
